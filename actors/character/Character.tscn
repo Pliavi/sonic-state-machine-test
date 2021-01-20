@@ -1,0 +1,86 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/character/idle.png" type="Texture" id=1]
+[ext_resource path="res://actors/character/Character.gd" type="Script" id=2]
+[ext_resource path="res://lib/state_machine/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://actors/character/states/SPINNING.gd" type="Script" id=4]
+[ext_resource path="res://actors/character/states/WALKING.gd" type="Script" id=5]
+[ext_resource path="res://actors/character/states/JUMPING.gd" type="Script" id=6]
+[ext_resource path="res://actors/character/states/RUNNING.gd" type="Script" id=7]
+[ext_resource path="res://actors/character/states/IDLE.gd" type="Script" id=8]
+[ext_resource path="res://actors/character/states/HURT.gd" type="Script" id=9]
+[ext_resource path="res://actors/character/states/CROUCHING.gd" type="Script" id=10]
+[ext_resource path="res://actors/character/states/DEAD.gd" type="Script" id=11]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 66, 66 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "IDLE",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "JUMPING",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "RUNNING",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "WALKING",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+[sub_resource type="CircleShape2D" id=4]
+
+[node name="character" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "JUMPING"
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+shape = SubResource( 4 )
+
+[node name="state_machine" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="CROUCHING" type="Node" parent="state_machine"]
+script = ExtResource( 10 )
+
+[node name="DEAD" type="Node" parent="state_machine"]
+script = ExtResource( 11 )
+
+[node name="HURT" type="Node" parent="state_machine"]
+script = ExtResource( 9 )
+
+[node name="IDLE" type="Node" parent="state_machine"]
+script = ExtResource( 8 )
+
+[node name="JUMPING" type="Node" parent="state_machine"]
+script = ExtResource( 6 )
+
+[node name="RUNNING" type="Node" parent="state_machine"]
+script = ExtResource( 7 )
+
+[node name="SPINNING" type="Node" parent="state_machine"]
+script = ExtResource( 4 )
+
+[node name="WALKING" type="Node" parent="state_machine"]
+script = ExtResource( 5 )

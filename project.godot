@@ -1,0 +1,86 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "State",
+"class": "CharacterState",
+"language": "GDScript",
+"path": "res://actors/character/CharacterState.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://lib/state_machine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://lib/state_machine/StateMachine.gd"
+}, {
+"base": "Node",
+"class": "StateMachineOLD",
+"language": "GDScript",
+"path": "res://lib/state_machine/StateMachine.old.gd"
+}, {
+"base": "Node",
+"class": "StateOL2",
+"language": "GDScript",
+"path": "res://lib/state_machine/State.old2.gd"
+}, {
+"base": "Node",
+"class": "StateOLD",
+"language": "GDScript",
+"path": "res://lib/state_machine/State.old.gd"
+} ]
+_global_script_class_icons={
+"CharacterState": "",
+"State": "",
+"StateMachine": "",
+"StateMachineOLD": "",
+"StateOL2": "",
+"StateOLD": ""
+}
+
+[application]
+
+config/name="2DGame"
+run/main_scene="res://stages/game.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://utils/Globals.gd"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
