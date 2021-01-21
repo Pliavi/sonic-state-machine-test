@@ -1,7 +1,7 @@
 extends Node
 class_name StateMachine
 
-export var initial_state: NodePath
+export (NodePath) var initial_state: NodePath
 
 onready var state: State = get_node(initial_state)
 onready var _actor = owner
@@ -13,7 +13,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	yield(_actor, "ready")
-	state.enter()
+	state._enter()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -21,12 +21,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	state.update(delta)
+	state._update(delta)
 
 
 func change_state(state_name: String, options: Dictionary = {}) -> void:
+	print(state_name)
 	var target_state := get_node(state_name)
 
 	state.exit()
 	self.state = target_state
-	state.enter(options)
+	state._enter(options)
