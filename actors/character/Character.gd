@@ -1,48 +1,34 @@
 extends KinematicBody2D
 
-const SPEED = 50000
-const JUMP_SPEED = 1000
+class_name Character
+
+const SPEED = 20000
+const JUMP_SPEED = 500
 
 onready var sprite: AnimatedSprite = $sprite
 onready var hurtbox: Area2D = $hurtbox
-onready var state_machine: StateMachine
+onready var state_machine := $state_machine
 
 var velocity: Vector2 = Vector2.ZERO
-var behavior_instance = preload("behaviors.gd").new()
+var _behavior_instance = preload("Behaviors.gd").new()
 
 
 func _ready():
-	var states_path = "res://actors/character/states/"
-	self.state_machine = StateMachine.new()
-	self.state_machine.setup(
-		self,
-		"IDLE",
-		{
-			"CROUCHING": load(states_path + "CROUCHING.gd").new(),
-			"DEAD": load(states_path + "DEAD.gd").new(),
-			"HURT": load(states_path + "HURT.gd").new(),
-			"IDLE": load(states_path + "IDLE.gd").new(),
-			"JUMPING": load(states_path + "JUMPING.gd").new(),
-			"RUNNING": load(states_path + "RUNNING.gd").new(),
-			"SPINNING": load(states_path + "SPINNING.gd").new(),
-			"WALKING": load(states_path + "WALKING.gd").new()
-		}
-	)
 	self.hurtbox.connect("area_entered", self, "_on_hurt")
 
 
 func is_still_walking() -> bool:
-	return abs(self.velocity.x) > 0
+	return abs(self.velocity.x) > 1
 
 
 func is_idling() -> bool:
-	var is_not_walking = velocity.x < 1
+	var is_not_walking = abs(self.velocity.x) < 1
 
 	return is_on_floor() and is_not_walking
 
 
 func is_falling() -> bool:
-	var is_falling = velocity.y > 0
+	var is_falling = self.velocity.y > 0
 
 	return is_falling
 
@@ -68,9 +54,10 @@ func can_crouch() -> bool:
 
 
 func can_spin() -> bool:
+	var will_spin = Input.is_action_pressed("ui_down")
 	var is_character_moving = abs(self.velocity.x) > 1
 
-	return is_character_moving
+	return is_character_moving and will_spin
 
 
 func _on_hurt(_area_entered: Area2D):
