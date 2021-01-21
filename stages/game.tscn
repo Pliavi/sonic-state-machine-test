@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://actors/character/Character.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 276.361, 10 )
 
 [node name="game" type="Node2D"]
 
@@ -8,3 +11,9 @@
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 0, 138.98 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 1 )

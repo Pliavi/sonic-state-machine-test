@@ -23,29 +23,11 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://lib/state_machine/StateMachine.gd"
-}, {
-"base": "Node",
-"class": "StateMachineOLD",
-"language": "GDScript",
-"path": "res://lib/state_machine/StateMachine.old.gd"
-}, {
-"base": "Node",
-"class": "StateOL2",
-"language": "GDScript",
-"path": "res://lib/state_machine/State.old2.gd"
-}, {
-"base": "Node",
-"class": "StateOLD",
-"language": "GDScript",
-"path": "res://lib/state_machine/State.old.gd"
 } ]
 _global_script_class_icons={
 "CharacterState": "",
 "State": "",
-"StateMachine": "",
-"StateMachineOLD": "",
-"StateOL2": "",
-"StateOLD": ""
+"StateMachine": ""
 }
 
 [application]
