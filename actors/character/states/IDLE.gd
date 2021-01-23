@@ -1,11 +1,11 @@
 extends CharacterState
 
 
-func _init() -> void:
+func _init():
 	self.behaviors = ["fall_behavior"]
 
 
-func enter(_options: Dictionary = {}) -> void:
+func enter(_options := {}):
 	var character = self._actor as Character
 
 	if character.is_still_walking():
@@ -15,7 +15,7 @@ func enter(_options: Dictionary = {}) -> void:
 	character.velocity.x = 0
 
 
-func update(_delta: float) -> void:
+func update(_delta):
 	var character = self._actor as Character
 
 	if character.will_walk():

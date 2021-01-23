@@ -6,16 +6,20 @@ func _init():
 
 
 func update(_delta):
-	var character = self._actor
+	var character = self._actor as Character
 
-	if character.will_jump():  # TODO: Change to "will_jump"
-		return self.change_state("JUMPING")
+	if character.will_jump():
+		self.change_state("JUMPING")
+		return
 
-	if character.will_crouch():  # TODO: Change to "will_spin"
-		return self.change_state("CROUCHING")
+	if character.will_crouch():
+		self.change_state("CROUCHING")
+		return
 
 	if character.is_idling():
-		return self.change_state("IDLE")
+		self.change_state("IDLE")
+		return
 
 	if abs(character.velocity.x) > 300:
-		return self.change_state("RUNNING")
+		self.change_state("RUNNING")
+		return

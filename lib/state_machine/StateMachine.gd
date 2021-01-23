@@ -36,7 +36,6 @@ func is_state(state_name: String) -> bool:
 
 func change_state(state_name: String, options: Dictionary = {}) -> void:
 	var target_state := get_node(state_name)
-	print(state_name)
 	_state_label.text = state_name
 
 	state.exit()
