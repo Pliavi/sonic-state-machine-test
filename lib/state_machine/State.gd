@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-onready var _state_machine: StateMachine = self.get_parent()
+onready var _state_machine = self.get_parent()
 onready var _actor: Node = owner
 
 
