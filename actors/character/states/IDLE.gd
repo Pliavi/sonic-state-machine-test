@@ -6,22 +6,26 @@ func _init() -> void:
 
 
 func enter(_options: Dictionary = {}) -> void:
-	var character = self._actor  # as Character #XXX: GDScript bug 😡
+	var character = self._actor as Character
 
 	if character.is_still_walking():
-		return self.change_state("WALKING")
+		self.change_state("WALKING")
+		return
 
 	character.velocity.x = 0
 
 
 func update(_delta: float) -> void:
-	var character = self._actor  # as Character #XXX: GDScript bug 😡
+	var character = self._actor as Character
 
-	if character.can_walk():  #TODO: change verb to "will_walk"
-		return self.change_state("WALKING")
+	if character.will_walk():
+		self.change_state("WALKING")
+		return
 
-	if character.can_jump():  #TODO: change verb to "will_jump"
-		return self.change_state("JUMPING")
+	if character.will_jump():
+		self.change_state("JUMPING")
+		return
 
-	if character.can_crouch():  #TODO: change verb to "will_crouch"
-		return self.change_state("CROUCHING")
+	if character.will_crouch():
+		self.change_state("CROUCHING")
+		return

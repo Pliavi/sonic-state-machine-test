@@ -8,14 +8,11 @@ func _init():
 func update(_delta):
 	var character = self._actor
 
-	if character.will_push():
-		return self.change_state("PUSHING")
-
-	if character.will_jump():
+	if character.will_jump():  # TODO: Change to "will_jump"
 		return self.change_state("JUMPING")
 
-	if character.will_spin():
-		return self.change_state("SPINNING")
+	if character.will_crouch():  # TODO: Change to "will_spin"
+		return self.change_state("CROUCHING")
 
 	if character.is_idling():
 		return self.change_state("IDLE")
