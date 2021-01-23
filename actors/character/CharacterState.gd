@@ -18,13 +18,13 @@ func _ready():
 func _enter(options: Dictionary = {}):
 	var sprite = self._actor.sprite as AnimatedSprite
 	sprite.play(self.name)
-	self.enter()
+	self.enter(options)
 
 func _update(delta):
 	var character = self._actor
 
 	for behavior in self._behaviors_refs:
-		behavior.call_func(delta, character)
+		behavior.call_func(delta, self)
 
 	self.update(delta)
 
