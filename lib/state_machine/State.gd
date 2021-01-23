@@ -16,6 +16,9 @@ func _init():
 func _ready() -> void:
 	yield(_actor, "ready")
 
+func is_state(state_name:String):
+	return self.name == state_name
+
 
 func change_state(state_name, options = {}):
 	self._state_machine.change_state(state_name, options)

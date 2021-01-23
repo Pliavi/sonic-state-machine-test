@@ -4,7 +4,8 @@ class_name StateMachine
 export (NodePath) var initial_state: NodePath
 
 onready var state: State = get_node(initial_state)
-onready var _actor = owner
+onready var _actor: Node2D = owner
+onready var _state_label: Label = $state_label
 
 
 func _init() -> void:
@@ -22,11 +23,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	state._update(delta)
+	# Debug
+	_state_label.rect_position = (
+		(_actor as Node2D).global_position
+		+ Vector2(-30, -30)
+	)
+
+
+func is_state(state_name: String) -> bool:
+	return state.name == state_name
 
 
 func change_state(state_name: String, options: Dictionary = {}) -> void:
-	print(state_name)
 	var target_state := get_node(state_name)
+	print(state_name)
+	_state_label.text = state_name
 
 	state.exit()
 	self.state = target_state
